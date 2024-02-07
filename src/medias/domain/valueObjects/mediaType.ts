@@ -8,7 +8,7 @@ interface MediaTypeProps {
 }
 
 export class MediaType extends ValueObject<MediaTypeProps> {
-    get value (): string {
+    get value (): SUPPORTED_MEDIA_TYPE {
         return this.props.value;
     }
 
