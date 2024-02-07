@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
-import { isProduction } from '../config';
+import { isProduction } from '../../config';
 import { v1Router }  from "./api/api"
 
 const app = express();

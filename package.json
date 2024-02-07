@@ -1,7 +1,7 @@
 {
   "name": "cm.ms.gge.media",
   "version": "0.0.1",
-  "description": "Small microservice to manipulate and save media",
+  "description": "Generic small microservice to manipulate and save media",
   "main": "main.ts",
   "scripts": {
     "build": "rimraf ./dist && tsc",
