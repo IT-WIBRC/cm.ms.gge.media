@@ -27,8 +27,8 @@ export class CreateMediaController extends BaseController {
       });
       
 
-      if (result.isLeft()) {
-        const error = result.value;
+    //   if (result.isLeft()) {
+    //     const error = result.value;
   
         switch (error.constructor) {
           case CreateMediaErrors.NoMediaUploaded:
