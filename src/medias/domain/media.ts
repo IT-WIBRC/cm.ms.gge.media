@@ -7,10 +7,10 @@ import { Entity } from "../../core/domain/Entity";
 
 
 interface MediaProps {
-  link: string;
   type: MediaType;
-  createdAt: string;
-  updatedAt: string;
+  link?: string;
+  createdAt?: string;
+  updatedAt?: string;
   description?: string;
 }
 

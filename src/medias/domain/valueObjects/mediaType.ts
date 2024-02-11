@@ -4,11 +4,11 @@ import { Result } from "../../../core/logic/Result";
 import { SUPPORTED_MEDIA_TYPE } from "../types";
 
 interface MediaTypeProps {
-    value: SUPPORTED_MEDIA_TYPE;
+    value: string;
 }
 
 export class MediaType extends ValueObject<MediaTypeProps> {
-    get value (): SUPPORTED_MEDIA_TYPE {
+    get value (): string {
         return this.props.value;
     }
 
@@ -16,16 +16,16 @@ export class MediaType extends ValueObject<MediaTypeProps> {
         super(props);
     }
 
-    public static create (mediaType: SUPPORTED_MEDIA_TYPE): Result<MediaType> {
+    public static create (mediaType: string): Result<MediaType> {
         const guardResult = Guard.againstNullOrUndefined(mediaType, 'type');
 
         if (!guardResult.succeeded) {
           return Result.fail<MediaType>(guardResult.message);
         } else {
 
-          const supportedMediaType = Object.values(SUPPORTED_MEDIA_TYPE).includes(mediaType);
+          const supportedMediaType = Object.keys(SUPPORTED_MEDIA_TYPE).includes(mediaType);
           if (!supportedMediaType) {
-            return Result.fail<MediaType>("Media type is unknown");
+            return Result.fail<MediaType>("Unknown media type is");
           }
           
           return Result.ok<MediaType>(new MediaType({ value: mediaType }));

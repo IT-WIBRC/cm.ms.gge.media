@@ -24,14 +24,14 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
   async execute (req: CreateMediaDTO): Promise<Response> {
     const { type, description } = req;
 
-    const typeOrError = MediaType.create({ value: type });
+    const mediaTypeOrError = MediaType.create(type);
 
-    if (typeOrError.isFailure) {
-      return left(Result.fail<void>(typeOrError.error)) as Response;
+    if (mediaTypeOrError.isFailure) {
+      return left(Result.fail<void>(mediaTypeOrError.error)) as Response;
     }
 
-    const mediaOrError = Media.create({ 
-     type,
+    const mediaOrError = Media.create({
+      type: mediaTypeOrError.getValue(),
       description,
     });
 
