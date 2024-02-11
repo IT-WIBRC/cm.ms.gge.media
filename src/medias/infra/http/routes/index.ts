@@ -1,7 +1,9 @@
 import { Router } from "express";
+import { createMediaController } from "../../../useCases/createMedia";
 
 const imageRouter = Router();
 
-imageRouter.get("");
+imageRouter.post("/add",
+ (request, response) => createMediaController.execute(request, response));
 
 export { imageRouter }

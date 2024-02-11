@@ -16,24 +16,29 @@ export class CreateMediaController extends BaseController {
     //change the DTO according to the file's data that will be uploaded
     const dto: CreateMediaDTO = this.req.body as CreateMediaDTO;
 
-    try {
-      const result = await this.useCase.execute(dto);
+    console.log(this.req.files);
+    
 
-      if (result.isLeft()) {
-        const error = result.value;
+    // try {
+    //   const result = await this.useCase.execute(dto);
+
+    //   if (result.isLeft()) {
+    //     const error = result.value;
   
-        switch (error.constructor) {
-          case CreateMediaErrors.ServiceError:
-            return this.conflict(error.errorValue().message)
-          default:
-            return this.fail(error.errorValue().message);
-        }
-      } else {
-        return this.ok(this.res);
-      }
+    //     switch (error.constructor) {
+    //       case CreateMediaErrors.ServiceError:
+    //         return this.conflict(error.errorValue().message)
+    //       default:
+    //         return this.fail(error.errorValue().message);
+    //     }
+    //   } else {
+    //     return this.ok(this.res);
+    //   }
 
-    } catch (err) {
-      return this.fail(err)
-    }
+    // } catch (err) {
+    //   return this.fail(err)
+    // }
+
+    return this.ok(this.res);
   }
 }
