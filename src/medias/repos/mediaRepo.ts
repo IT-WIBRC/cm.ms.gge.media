@@ -1,4 +1,5 @@
 import { Media } from "../domain/media";
+import { MediaMap } from "../mappers/MediaMap";
 
 export interface IMediaRepo {
   save(media: Media): Promise<void>;
@@ -11,7 +12,14 @@ export class MediaRepo implements IMediaRepo {
     this.models = models;
   }
 
-  save(media: Media): Promise<void> {
-    throw new Error("Method not implemented.");
+  async save(media: Media): Promise<void> {
+    const MediaModel = this.models.Media;
+    const rawMedia = MediaMap.toPersistence(media);
+
+    try {
+      await MediaModel.save(rawMedia)
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

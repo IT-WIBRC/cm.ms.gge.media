@@ -1,7 +1,8 @@
-import { SUPPORTED_MEDIA_TYPE } from "../../domain/types";
+import { IFileUploaded } from "../../../core/helpers/types/IFileUploaded";
 
 export interface CreateMediaDTO {
     link: string;
-    type: SUPPORTED_MEDIA_TYPE;
+    type: string;
+    file: IFileUploaded;
     description?: string;
   }

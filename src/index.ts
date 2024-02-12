@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import { app } from "./infra/http/app";
 
 const PORT = process.env.PORT || 5000;
