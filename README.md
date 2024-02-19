@@ -1,5 +1,5 @@
 # cm.ms.gge.media
-Small microservice to manipulate and save media
+Small microservice to manipulate and save medias either on an external media management (cloudinary, s3) or on the server itself
 
 # TODO
  - Add logs
