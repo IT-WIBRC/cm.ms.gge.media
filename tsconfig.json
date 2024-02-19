@@ -24,7 +24,8 @@
   "exclude": [
     "node_modules",
     "!node_modules/@types",
-    "./dist"
+    "./dist",
+    "**/__tests__/**",
   ],
   "lib": ["es2015"]
 }

@@ -10,7 +10,7 @@ import { IMediaManagement } from "../../../core/services/iMediaManagement";
 
 type Response = Either<
   GenericAppError.UnexpectedError |
-  CreateMediaErrors.ServiceError |
+  CreateMediaErrors.NoMediaUploaded |
   Result<any>, 
   Result<void>
 >

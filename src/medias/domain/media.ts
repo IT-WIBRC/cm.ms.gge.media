@@ -62,7 +62,7 @@ export class Media extends Entity<MediaProps>{
     ];
 
 
-    const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps);
+    const guardResult = Guard.againstFalsyValuesBulk(guardedProps);
 
     if (!guardResult.succeeded) {
       return Result.fail<Media>(guardResult.message)

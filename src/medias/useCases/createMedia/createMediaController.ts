@@ -25,16 +25,14 @@ export class CreateMediaController extends BaseController {
         },
         description,
       });
-
-      console.log(result);
       
 
       if (result.isLeft()) {
         const error = result.value;
   
         switch (error.constructor) {
-          case CreateMediaErrors.ServiceError:
-            return this.conflict(error.errorValue().message)
+          case CreateMediaErrors.NoMediaUploaded:
+            return this.clientError(error.errorValue().message)
           default:
             return this.fail(error.errorValue().message);
         }

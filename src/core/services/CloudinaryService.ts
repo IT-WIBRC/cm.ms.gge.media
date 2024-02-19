@@ -1,4 +1,5 @@
 import { SUPPORTED_MEDIA_TYPE } from "../../medias/domain/types";
+import { fromBufferToBase64 } from "../helpers/types/file";
 import { Result } from "../logic/Result";
 import { IMedia, IMediaManagement, IMediaResponse } from "./iMediaManagement";
 import cloudinary from "cloudinary";
@@ -36,8 +37,8 @@ export class CloudinaryService implements IMediaManagement {
     }
 
     async save(media: IMedia): Promise<Result<IMediaResponse>> {
-        const b64 = Buffer.from(media.file.data).toString("base64");
-        const dataURI = "data:" + media.file.mimetype + ";base64," + b64;
+        const { data, mimetype} = media.file;
+        const dataURI = fromBufferToBase64(data, mimetype);
         let result: Result<IMediaResponse>;
 
         try {
