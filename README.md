@@ -5,5 +5,8 @@ Small microservice to manipulate and save medias either on an external media man
  - Add logs (when the file failed to be save)
  - Use the builder pattern to manage all the possibles services (MediaServiceBuilder)
 
+# TODO
+ - Add logs
+
 # Standard
   - Add linter (eslint, prettier, stylelint)
