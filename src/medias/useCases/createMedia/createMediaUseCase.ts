@@ -40,21 +40,22 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
       return left(Result.fail<void>(mediaTypeOrError.error)) as Response;
     }
  
-    let fileUploaded: any;
-    try {
-      fileUploaded = await this.mediaManagementService.save({
-        file,
-      });
-    } catch (error) {
+    const fileUploaded = await this.mediaManagementService.save({
+      file,
+    });
+
+    if (fileUploaded.isFailure) {
       return left(Result.fail<void>(
-        "Error encounter when saving file to cloudinary")) as Response;
+        "Error encounter when saving file")) as Response;
     }
+
+    const { url, filename } = fileUploaded.getValue();
 
     const mediaOrError = Media.create({
       type: mediaTypeOrError.getValue(),
       description,
-      link: fileUploaded.secure_url,
-      name: fileUploaded.original_filename ?? file.name,
+      link: url,
+      name: filename ?? file.name,
     });
 
     if (mediaOrError.isFailure) {

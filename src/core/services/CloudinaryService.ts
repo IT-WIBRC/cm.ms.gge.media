@@ -1,4 +1,6 @@
-import { IMedia, IMediaManagement } from "./iMediaManagement";
+import { SUPPORTED_MEDIA_TYPE } from "../../medias/domain/types";
+import { Result } from "../logic/Result";
+import { IMedia, IMediaManagement, IMediaResponse } from "./iMediaManagement";
 import cloudinary from "cloudinary";
 
 type UploadApiOptions = cloudinary.UploadApiOptions;
@@ -8,12 +10,17 @@ const {
     CLOUDINARY_API_SECRET,
  } = process.env;
 
+ interface ApiError {
+    error: {
+        message: string;
+    }
+};
 export class CloudinaryService implements IMediaManagement {
     private cloudinaryProvider = cloudinary.v2;
     private uploadOptions: UploadApiOptions;
 
-    public constructor(options?: UploadApiOptions) {
-    
+    public constructor() {
+
         this.cloudinaryProvider.config({
             secure: true,
             cloud_name: CLOUDINARY_CLOUD_NAME,
@@ -21,22 +28,36 @@ export class CloudinaryService implements IMediaManagement {
             api_secret: CLOUDINARY_API_SECRET,
         });
 
-        if (options) {
-            this.uploadOptions = options;
-        } else {
-            this.uploadOptions = {
-                use_filename: true,
-                unique_filename: false,
-                overwrite: true,
-            }
-        }
+        this.uploadOptions = {
+            use_filename: true,
+            unique_filename: false,
+            overwrite: true,
+        };
     }
 
-    async save(media: IMedia): Promise<any> {
+    async save(media: IMedia): Promise<Result<IMediaResponse>> {
         const b64 = Buffer.from(media.file.data).toString("base64");
-        let dataURI = "data:" + media.file.mimetype + ";base64," + b64;
-        return this.cloudinaryProvider
+        const dataURI = "data:" + media.file.mimetype + ";base64," + b64;
+        let result: Result<IMediaResponse>;
+
+        try {
+            const response = await this.cloudinaryProvider
             .uploader
             .upload(dataURI, this.uploadOptions);
+
+            result =  Result.ok({
+                format: response.format,
+                resource_type: SUPPORTED_MEDIA_TYPE[response.resource_type.toUpperCase()],
+                created_at: response.created_at,
+                filename: response.original_filename,
+                url: response.secure_url ?? response.url,
+            });
+        } catch(apiError: unknown) {
+            result = Result.fail((apiError as ApiError).error.message);
+        }
+
+        return result;
     }
+
+   
 }
