@@ -9,7 +9,7 @@
     "db:delete:dev": "cross-env NODE_ENV=development node scripts/db/delete",
     "db:flush:dev": "cross-env NODE_ENV=development npm run db:delete:dev && npm run db:create:dev",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "test": "jest",
+    "test:unit": "jest",
     "test:dev": "jest --watchAll",
     "testWithCoverage": "jest --coverage"
   },
