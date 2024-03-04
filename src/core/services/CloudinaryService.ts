@@ -1,5 +1,5 @@
 import { SUPPORTED_MEDIA_TYPE } from "../../medias/domain/types";
-import { fromBufferToBase64 } from "../helpers/types/file";
+import { fromBufferToCustomBase64 } from "../helpers/file";
 import { Result } from "../logic/Result";
 import { IMedia, IMediaManagement, IMediaResponse } from "./iMediaManagement";
 import cloudinary from "cloudinary";
@@ -16,6 +16,7 @@ const {
         message: string;
     }
 };
+
 export class CloudinaryService implements IMediaManagement {
     private cloudinaryProvider = cloudinary.v2;
     private uploadOptions: UploadApiOptions;
@@ -38,7 +39,7 @@ export class CloudinaryService implements IMediaManagement {
 
     async save(media: IMedia): Promise<Result<IMediaResponse>> {
         const { data, mimetype} = media.file;
-        const dataURI = fromBufferToBase64(data, mimetype);
+        const dataURI = fromBufferToCustomBase64(data, mimetype);
         let result: Result<IMediaResponse>;
 
         try {
