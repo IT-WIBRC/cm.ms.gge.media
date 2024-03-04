@@ -14,12 +14,16 @@ export class CreateMediaController extends BaseController {
 
   async executeImpl (): Promise<any> {
     const description = this.req.body.description;
-    const fileUploaded = this.req.files.media as UploadedFile;
+    const fileUploaded = this.req.files?.media as UploadedFile;
     
+    if (!fileUploaded || Object.keys(fileUploaded).length === 0) {
+      return this.clientError("No files were uploaded.");
+    }
+
     try {
       const result = await this.useCase.execute({
         link: "",
-        type: fileUploaded.mimetype.split("/")[0].toUpperCase(),
+        type: fileUploaded?.mimetype?.split("/")[0]?.toUpperCase(),
         file: {
           ...fileUploaded,
         },
@@ -27,8 +31,8 @@ export class CreateMediaController extends BaseController {
       });
       
 
-    //   if (result.isLeft()) {
-    //     const error = result.value;
+      if (result.isLeft()) {
+        const error = result.value;
   
         switch (error.constructor) {
           case CreateMediaErrors.NoMediaUploaded:
@@ -41,7 +45,7 @@ export class CreateMediaController extends BaseController {
       }
 
     } catch (err) {
-      return this.fail(err)
+      return this.fail(err);
     }
   }
 }

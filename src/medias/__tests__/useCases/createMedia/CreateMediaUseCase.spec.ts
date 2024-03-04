@@ -31,18 +31,6 @@ describe("CreateMediaUseCase", () => {
         jest.clearAllMocks();
     });
 
-    it("should return an error message when there is no file uploaded", async () => {
-        const request = {
-            ...baseRequest,
-            file: {},
-        };
-
-        const noFileUploadedResponse = await createMediaUseCase.execute(request as CreateMediaDTO);
-        expect(noFileUploadedResponse.isLeft()).toBe(true);
-        expect(noFileUploadedResponse.value.isFailure).toBe(true);
-        expect(noFileUploadedResponse.value.errorValue()).toBe("No files were uploaded.");
-    });
-
     it("should return an error message when the file type is not supported", async () => {
         const request = {
             ...baseRequest,

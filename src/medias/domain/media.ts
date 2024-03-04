@@ -37,15 +37,15 @@ export class Media extends Entity<MediaProps>{
   }
 
   get description (): string {
-    return this.props.description;
+    return this.props.description ?? "";
   }
 
   get createdAt (): string {
-    return this.props.createdAt;
+    return this.props.createdAt ?? "";
   }
 
   get updatedAt (): string {
-    return this.props.updatedAt;
+    return this.props.updatedAt ?? "";
   }
 
 

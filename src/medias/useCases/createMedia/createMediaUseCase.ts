@@ -30,10 +30,6 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
   async execute (req: CreateMediaDTO): Promise<Response> {
     const { type, description, file } = req;
 
-    if (!file || Object.keys(file).length === 0) {
-       return left(Result.fail<void>("No files were uploaded.")) as Response;
-    }
-
     const mediaTypeOrError = MediaType.create(type);
 
     if (mediaTypeOrError.isFailure) {
