@@ -26,6 +26,7 @@
     "!node_modules/@types",
     "./dist",
     "**/__tests__/**",
+    "*.spec.ts"
   ],
   "lib": ["es2015"]
 }

@@ -1,5 +1,5 @@
-import { Media } from "../media";
-import { MediaType } from "../valueObjects/mediaType";
+import { Media } from "../../domain/media";
+import { MediaType } from "../../domain/valueObjects/mediaType";
 
 describe("Media Entity", () => {
     it("should return an error message when the field 'link' is not provided", () => {

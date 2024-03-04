@@ -45,6 +45,7 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
     });
 
     if (fileUploaded.isFailure) {
+      //TODO: create a log for this
       return left(Result.fail<void>(
         "Error encounter when saving file")) as Response;
     }
@@ -59,15 +60,17 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
     });
 
     if (mediaOrError.isFailure) {
-      return left(Result.fail<void>(mediaOrError.error)) as Response;
+      //TODO: create a log for this
+      return left(Result.fail<void>("Error encounter when saving file to provider")) as Response;
     }
 
     const media: Media = mediaOrError.getValue();
 
     try {
       await this.mediaRepo.save(media);
-    } catch (err) {
-      return left(new GenericAppError.UnexpectedError(err)) as Response;
+    } catch (error: unknown) {
+      //TODO: create a log for this
+      return left(new GenericAppError.UnexpectedError(error)) as Response;
     }
 
     return right(Result.ok<void>()) as Response;

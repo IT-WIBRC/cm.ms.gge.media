@@ -1,4 +1,4 @@
-import { MediaType } from "../../valueObjects/mediaType";
+import { MediaType } from "../../../domain/valueObjects/mediaType";
 
 describe("MediaType", () => {
     it("should return the media type ValueObject when it is valid", () => {
