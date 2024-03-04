@@ -22,6 +22,13 @@ export class Media {
   declare link: string;
 
   @Column({
+    nullable: false,
+    type: "varchar",
+    unique: false
+  })
+  declare name: string;
+
+  @Column({
     type: "varchar",
     charset: "utf-8",
   })

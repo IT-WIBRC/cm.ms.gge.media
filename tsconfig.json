@@ -1,13 +1,32 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "ESNext",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "typeRoots" : ["./node_modules/@types", "./src/@types"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "lib": ["es6"],
+    "types": ["node", "jest"],
   },
+  "include": [
+    "src/infra/sequelize/**/*.js",
+    "src/infra/sequelize/**/*.ts",
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.js",
+  ],
+  "exclude": [
+    "node_modules",
+    "!node_modules/@types",
+    "./dist",
+    "**/__tests__/**",
+    "*.spec.ts"
+  ],
   "lib": ["es2015"]
 }

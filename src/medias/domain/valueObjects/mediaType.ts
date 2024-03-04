@@ -1,5 +1,4 @@
 import { ValueObject } from "../../../core/domain/ValueObject";
-import { Guard } from "../../../core/logic/Guard";
 import { Result } from "../../../core/logic/Result";
 import { SUPPORTED_MEDIA_TYPE } from "../types";
 
@@ -17,15 +16,13 @@ export class MediaType extends ValueObject<MediaTypeProps> {
     }
 
     public static create (mediaType: string): Result<MediaType> {
-        const guardResult = Guard.againstNullOrUndefined(mediaType, 'type');
-
-        if (!guardResult.succeeded) {
-          return Result.fail<MediaType>(guardResult.message);
+        if (!mediaType) {
+          return Result.fail<MediaType>("Media type not provided");
         } else {
 
           const supportedMediaType = Object.keys(SUPPORTED_MEDIA_TYPE).includes(mediaType);
           if (!supportedMediaType) {
-            return Result.fail<MediaType>("Unknown media type is");
+            return Result.fail<MediaType>(`Unknown the media type '${mediaType}'`);
           }
           
           return Result.ok<MediaType>(new MediaType({ value: mediaType }));

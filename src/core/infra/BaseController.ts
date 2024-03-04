@@ -31,7 +31,7 @@ export abstract class BaseController {
   }
 
   public clientError (message?: string) {
-    return BaseController.jsonResponse(this.res, 400, message ? message : 'Unauthorized');
+    return BaseController.jsonResponse(this.res, 400, message ? message : 'Bad request');
   }
 
   public unauthorized (message?: string) {
@@ -61,7 +61,7 @@ export abstract class BaseController {
   public fail (error: Error | string) {
     console.log(error);
     return this.res.status(500).json({
-      message: error.toString()
+      message: typeof error === "string" ? error : error
     })
   }
 }

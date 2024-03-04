@@ -1,0 +1,1 @@
+export const v4 = jest.fn(() => "6a133e20-277f-4f45-bfdf-957ba89f5838");

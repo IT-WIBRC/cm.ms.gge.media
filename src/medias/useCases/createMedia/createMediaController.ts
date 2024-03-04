@@ -1,8 +1,8 @@
 
 import { BaseController } from "../../../core/infra/BaseController";
 import { CreateMediaUseCase } from "./createMediaUseCase";
-import { CreateMediaDTO } from "./createMediaDTO";
 import { CreateMediaErrors } from "./createMediaError";
+import { UploadedFile } from "express-fileupload";
 
 export class CreateMediaController extends BaseController {
   private useCase: CreateMediaUseCase;
@@ -13,18 +13,30 @@ export class CreateMediaController extends BaseController {
   }
 
   async executeImpl (): Promise<any> {
-    //change the DTO according to the file's data that will be uploaded
-    const dto: CreateMediaDTO = this.req.body as CreateMediaDTO;
+    const description = this.req.body.description;
+    const fileUploaded = this.req.files?.media as UploadedFile;
+    
+    if (!fileUploaded || Object.keys(fileUploaded).length === 0) {
+      return this.clientError("No files were uploaded.");
+    }
 
     try {
-      const result = await this.useCase.execute(dto);
+      const result = await this.useCase.execute({
+        link: "",
+        type: fileUploaded?.mimetype?.split("/")[0]?.toUpperCase(),
+        file: {
+          ...fileUploaded,
+        },
+        description,
+      });
+      
 
       if (result.isLeft()) {
         const error = result.value;
   
         switch (error.constructor) {
-          case CreateMediaErrors.ServiceError:
-            return this.conflict(error.errorValue().message)
+          case CreateMediaErrors.NoMediaUploaded:
+            return this.clientError(error.errorValue().message)
           default:
             return this.fail(error.errorValue().message);
         }
@@ -33,7 +45,7 @@ export class CreateMediaController extends BaseController {
       }
 
     } catch (err) {
-      return this.fail(err)
+      return this.fail(err);
     }
   }
 }
