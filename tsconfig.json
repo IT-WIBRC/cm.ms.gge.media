@@ -3,7 +3,7 @@
     "allowJs": true,
     "module": "commonjs",
     "esModuleInterop": true,
-    "target": "ESNext",
+    "target": "ES2021",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./dist",

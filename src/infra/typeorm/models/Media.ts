@@ -1,30 +1,36 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { SUPPORTED_MEDIA_TYPE } from "../../../medias/domain/types";
 
 @Entity({
-    name: "t_media",
+  name: "t_media",
 })
 export class Media {
-    @PrimaryGeneratedColumn("uuid")
-    @Column({
-      primary: true,
-      type: "uuid",
-      nullable: false,
-      unique: true
-    })
+  @PrimaryGeneratedColumn("uuid")
+  @Column({
+    primary: true,
+    type: "uuid",
+    nullable: false,
+    unique: true,
+  })
   declare id: string;
 
   @Column({
     nullable: false,
     type: "varchar",
-    unique: true
+    unique: true,
   })
   declare link: string;
 
   @Column({
     nullable: false,
     type: "varchar",
-    unique: false
+    unique: false,
   })
   declare name: string;
 

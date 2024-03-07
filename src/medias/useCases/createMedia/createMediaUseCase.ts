@@ -9,25 +9,25 @@ import { Media } from "../../domain/media";
 import { IMediaManagement } from "../../../core/services/iMediaManagement";
 
 type Response = Either<
-  GenericAppError.UnexpectedError |
-  CreateMediaErrors.NoMediaUploaded |
-  Result<any>, 
+  | GenericAppError.UnexpectedError
+  | CreateMediaErrors.NoMediaUploaded
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | Result<any>,
   Result<void>
->
+>;
 
-export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Response>> {
+export class CreateMediaUseCase
+implements UseCase<CreateMediaDTO, Promise<Response>>
+{
   private mediaRepo: IMediaRepo;
   private mediaManagementService: IMediaManagement;
 
-  constructor (
-    mediaRepo: IMediaRepo,
-    mediaManagementService: IMediaManagement)
-  {
+  constructor(mediaRepo: IMediaRepo, mediaManagementService: IMediaManagement) {
     this.mediaRepo = mediaRepo;
     this.mediaManagementService = mediaManagementService;
   }
 
-  async execute (req: CreateMediaDTO): Promise<Response> {
+  async execute(req: CreateMediaDTO): Promise<Response> {
     const { type, description, file } = req;
 
     const mediaTypeOrError = MediaType.create(type);
@@ -35,15 +35,16 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
     if (mediaTypeOrError.isFailure) {
       return left(Result.fail<void>(mediaTypeOrError.error)) as Response;
     }
- 
+
     const fileUploaded = await this.mediaManagementService.save({
       file,
     });
 
     if (fileUploaded.isFailure) {
       //TODO: create a log for this
-      return left(Result.fail<void>(
-        "Error encounter when saving file")) as Response;
+      return left(
+        Result.fail<void>("Error encounter when saving file"),
+      ) as Response;
     }
 
     const { url, filename } = fileUploaded.getValue();
@@ -57,7 +58,9 @@ export class CreateMediaUseCase implements UseCase<CreateMediaDTO, Promise<Respo
 
     if (mediaOrError.isFailure) {
       //TODO: create a log for this
-      return left(Result.fail<void>("Error encounter when saving file to provider")) as Response;
+      return left(
+        Result.fail<void>("Error encounter when saving file to provider"),
+      ) as Response;
     }
 
     const media: Media = mediaOrError.getValue();
