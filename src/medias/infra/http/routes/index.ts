@@ -3,7 +3,8 @@ import { createMediaController } from "../../../useCases/createMedia";
 
 const imageRouter = Router();
 
-imageRouter.post("/add",
- (request, response) => createMediaController.execute(request, response));
+imageRouter.post("/add", (request, response) =>
+  createMediaController.execute(request, response),
+);
 
-export { imageRouter }
+export { imageRouter };

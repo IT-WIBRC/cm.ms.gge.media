@@ -6,9 +6,10 @@ export interface IMediaRepo {
 }
 
 export class MediaRepo implements IMediaRepo {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private models: any;
 
-  constructor (models: any) {
+  constructor(models: unknown) {
     this.models = models;
   }
 
@@ -17,7 +18,7 @@ export class MediaRepo implements IMediaRepo {
     const rawMedia = MediaMap.toPersistence(media);
 
     try {
-      await MediaModel.save(rawMedia)
+      await MediaModel.save(rawMedia);
     } catch (error) {
       console.log(error);
     }
