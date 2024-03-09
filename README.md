@@ -49,6 +49,7 @@ Once in the project repertory,
 - DB_USER : database user
 - DB_PASS : database password
 - DB_HOST : database host
+- DB_DIALECT : dialect you want to use ("posgres", "sqlite", "mysql2")
 - DB_DEV_DB_NAME : database name for development
 - DB_DEV_DB_PORT : database port for development
 - NUMBER_OF_FILES_UPLOADABLE: default(1)

@@ -2,6 +2,7 @@ const {
   DB_USER, 
   DB_PASS, 
   DB_HOST,
+  DB_DIALECT,
   DB_DEV_DB_NAME,
   DB_DEV_DB_PORT,
   DB_TEST_DB_NAME,
@@ -17,7 +18,7 @@ type DB_CONFIG_INFO = {
     database: string;
     host: string;
     port: string;
-    dialect: "postgres" | "sqlite" | "mysql2"
+    dialect: string;
 }
 
 type ENV = "development" | "test" | "production";
@@ -29,7 +30,7 @@ const databaseCredentials: Record<ENV, DB_CONFIG_INFO> = {
     database: DB_DEV_DB_NAME,
     host: DB_HOST,
     port: DB_DEV_DB_PORT,
-    dialect: "postgres"
+    dialect: DB_DIALECT
   },
   test: {
     username: DB_USER,
