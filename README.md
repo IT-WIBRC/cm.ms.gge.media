@@ -1,5 +1,3 @@
-[forks](https://api.github.com/repos/IT-WIBRC/cm.ms.gge.media/forks)
-
 # cm.ms.gge.media
 
 ## Description
@@ -19,14 +17,14 @@ Welcome to our project! This project is to build a media management api that use
 
 - To clone
  
- - with ssh
-  ```
-    git clone git@github.com:IT-WIBRC/cm.ms.gge.media.git
-  ```
- - with https
-  ```
-    git clone https://github.com/IT-WIBRC/cm.ms.gge.media.git
-  ```
+  - with ssh
+    ```
+      git clone git@github.com:IT-WIBRC/cm.ms.gge.media.git
+    ```
+  - with https
+    ```
+      git clone https://github.com/IT-WIBRC/cm.ms.gge.media.git
+    ```
 
 ### Prerequisite
 You will need to have `posgresql` database or image lauched
@@ -45,14 +43,27 @@ Once in the project repertory,
  ```
    npm ci
  ```
-- To start
- ```
-   npm run dev
- ```
+
+ You will need to create a `.env` file with this variable:
 
 - DB_USER : database user
 - DB_PASS : database password
 - DB_HOST : database host
+- DB_DEV_DB_NAME : database name for development
+- DB_DEV_DB_PORT : database port for development
+- NUMBER_OF_FILES_UPLOADABLE: default(1)
+- MAX_FILE_SIZE: default (1MB)
+- MAX_FILE_NAME_SIZE : default (50)
+- CLOUDINARY_CLOUD_NAME: Get from cloudinary
+- CLOUDINARY_API_KEY: Get from cloudinary
+- CLOUDINARY_API_SECRET: Get from cloudinary
+
+NB: For the any environment, you can update (DB_(Env)_DB_NAME, DB_(Env)_DB_PORT)
+
+- To start
+ ```
+   npm run dev
+ ```
 
 ## Contributing
 
