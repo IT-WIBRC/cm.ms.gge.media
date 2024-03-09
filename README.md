@@ -10,17 +10,49 @@ Welcome to our project! This project is to build a media management api that use
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
-- [Credits](#credits)
-- [Contact](#contact)
 
 ## Installation
 
-Step-by-step instructions on how to install the project, including any dependencies or prerequisites.
+ You can just clone teh project or fork it. One done it's all. 
 
 ## Usage
 
-Explanation of how to use the project, including any examples, configuration options, and input/output details.
+- To clone
+ 
+ - with ssh
+  ```
+    git clone git@github.com:IT-WIBRC/cm.ms.gge.media.git
+  ```
+ - with https
+  ```
+    git clone https://github.com/IT-WIBRC/cm.ms.gge.media.git
+  ```
+
+### Prerequisite
+You will need to have `posgresql` database or image lauched
+- [posgresql app](https://www.postgresql.org/download/)
+- [posgresql image](https://hub.docker.com/_/postgres/)
+
+NB: To use the image, you will need to have docker installed on your computer
+
+You can also use any other database you want instead of posgresql.
+
+### Lauch app
+
+Once in the project repertory,
+
+- To install dependencies
+ ```
+   npm ci
+ ```
+- To start
+ ```
+   npm run dev
+ ```
+
+- DB_USER : database user
+- DB_PASS : database password
+- DB_HOST : database host
 
 ## Contributing
 
