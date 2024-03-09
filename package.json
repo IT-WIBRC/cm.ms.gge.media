@@ -9,9 +9,9 @@
     "db:delete:dev": "cross-env NODE_ENV=development node scripts/db/delete",
     "db:flush:dev": "cross-env NODE_ENV=development npm run db:delete:dev && npm run db:create:dev",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "test:unit": "jest",
-    "test:dev": "jest --watchAll",
-    "testWithCoverage": "jest --coverage",
+    "test:unit": "cross-env NODE_ENV=test jest",
+    "test:dev": "cross-env NODE_ENV=test jest --watchAll",
+    "testWithCoverage": "cross-env NODE_ENV=test jest --coverage",
     "eslint:fix": "eslint .  --ext .ts --fix",
     "eslint": "eslint . --ext .ts --ignore-path .gitignore",
     "prepare": "husky install",
@@ -43,6 +43,7 @@
     "@types/jest": "^29.5.12",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.11.13",
+    "@types/supertest": "^6.0.2",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
@@ -52,12 +53,15 @@
     "jest": "^29.7.0",
     "lint-staged": "^15.2.2",
     "rimraf": "^2.7.1",
+    "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
     "ts-node": "10.7.0",
     "typescript": "^5.3.3"
   },
   "lint-staged": {
-    "*.ts": ["eslint"]
+    "*.ts": [
+      "eslint"
+    ]
   },
   "repository": {
     "type": "git",
