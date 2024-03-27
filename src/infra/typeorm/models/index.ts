@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import fs from "fs";
 import path from "path";
 import { databaseCredential } from "../config/config";
@@ -22,7 +23,7 @@ const connection = new DataSource({
   type: dialect,
   port,
   username,
-  password,
+  password: password as string,
   database,
   host,
   synchronize: !!isProduction,

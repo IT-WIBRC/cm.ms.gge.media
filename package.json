@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./dist && tsc",
 
-    "migration:generate": "cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:generate ./src/migrations/holiday -t Date.now",
+    "migration:generate": "cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:generate ./src/migrations/media -t Date.now",
     "migration:revert": "cross-env NODE_ENV=test typeorm -- -d ./src/infra/typeorm/models/index.ts migration:revert",
     "migration:run": "cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:run",
     
