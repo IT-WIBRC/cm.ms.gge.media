@@ -19,7 +19,6 @@ export class MediaRepo implements IMediaRepo {
 
     try {
       const media = await MediaModel.save(rawMedia);
-      console.log(media);
       return media.id;
     } catch (error) {
       console.log(error);
