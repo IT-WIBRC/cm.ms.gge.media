@@ -55,7 +55,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_TEST_DB_NAME }}
           POSTGRES_HOST: postgres
           POSTGRES_PORT: 5432
-          DB_PASSWORD: ${{ secrets.DB_PASS }}
+          DB_PASS: ${{ secrets.DB_PASS }}
           DB_DIALECT: ${{ secrets.DB_DIALECT }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PORT: ${{ secrets.DB_TEST_DB_PORT }}
