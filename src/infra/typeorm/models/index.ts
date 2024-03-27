@@ -5,7 +5,7 @@ import { databaseCredential } from "../config/config";
 import { DataSource, Repository } from "typeorm";
 import { isProduction } from "../../../config";
 
-const { username, password, database, host, dialect, port } =
+const { username, database, host, dialect, port } =
   databaseCredential;
 
 const models = fs
@@ -23,7 +23,7 @@ const connection = new DataSource({
   type: dialect,
   port,
   username,
-  password: password as string,
+  password: `${process.env.DB_PASS}`,
   database,
   host,
   synchronize: !!isProduction,
