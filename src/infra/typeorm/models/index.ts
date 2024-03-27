@@ -29,7 +29,7 @@ const connection = new DataSource({
   database,
   synchronize: !!isProduction,
   logging: !isProduction,
-  entities: [`${__dirname}/**/typeorm/models/*.{ts,js}`],
+  entities: [`${__dirname}/**/typeorm/models/*.{ts}`],
   logger: "advanced-console",
   uuidExtension: "uuid-ossp",
   migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
