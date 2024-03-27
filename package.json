@@ -16,7 +16,7 @@
 
     "test:unit": "cross-env NODE_ENV=test jest",
     "testWithCoverage": "cross-env NODE_ENV=test jest --coverage",
-    "db:create:test": "cross-env NODE_ENV=test node scripts/db/create",
+    "db:create:test": "cross-env NODE_ENV=test node ./node_modules/typeorm-extension/bin/cli.cjs db:create -d scripts/db/create",
     "db:delete:test": "cross-env NODE_ENV=test node scripts/db/delete",
     "db:flush:test": "cross-env NODE_ENV=test npm run db:delete:dev && npm run db:create:dev",
     

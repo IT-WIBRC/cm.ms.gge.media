@@ -58,4 +58,4 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PORT: ${{ secrets.DB_TEST_DB_PORT }}
-        run: npm run db:create:test && npm run migration:generate && npm run migration:run && npm run test:unit
+        run: npm run migration:generate && npm run migration:run && npm run test:unit
