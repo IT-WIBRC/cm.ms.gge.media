@@ -2,7 +2,7 @@ import { Media } from "../domain/media";
 import { MediaMap } from "../mappers/MediaMap";
 
 export interface IMediaRepo {
-  save(media: Media): Promise<void>;
+  save(media: Media): Promise<string>;
 }
 
 export class MediaRepo implements IMediaRepo {
@@ -13,12 +13,13 @@ export class MediaRepo implements IMediaRepo {
     this.models = models;
   }
 
-  async save(media: Media): Promise<void> {
+  async save(media: Media): Promise<string> {
     const MediaModel = this.models.Media;
     const rawMedia = MediaMap.toPersistence(media);
 
     try {
-      await MediaModel.save(rawMedia);
+      const media = await MediaModel.save(rawMedia);
+      return media.id;
     } catch (error) {
       console.log(error);
     }

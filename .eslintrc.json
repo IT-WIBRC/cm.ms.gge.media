@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -52,6 +53,17 @@
         "arrow-spacing": "error",
         "computed-property-spacing": ["error", "never"],
         "no-multi-spaces": "error",
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "max-len": [
+          "error",
+          { 
+            "code" : 80,
+            "tabWidth": 2,
+            "ignoreUrls": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
+          }
+        ]
     }
 }

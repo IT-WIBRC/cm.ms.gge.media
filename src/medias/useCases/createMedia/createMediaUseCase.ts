@@ -13,7 +13,7 @@ type Response = Either<
   | CreateMediaErrors.NoMediaUploaded
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | Result<any>,
-  Result<void>
+  Result<string>
 >;
 
 export class CreateMediaUseCase
@@ -28,14 +28,14 @@ implements UseCase<CreateMediaDTO, Promise<Response>>
   }
 
   async execute(req: CreateMediaDTO): Promise<Response> {
-    const { type, description, file } = req;
+    const { description, file } = req;
 
-    const mediaTypeOrError = MediaType.create(type);
+    const mediaTypeOrError = MediaType.create(file?.mimetype?.split("/")[0]?.toUpperCase());
 
     if (mediaTypeOrError.isFailure) {
       return left(Result.fail<void>(mediaTypeOrError.error)) as Response;
     }
-
+    
     const fileUploaded = await this.mediaManagementService.save({
       file,
     });
@@ -65,13 +65,14 @@ implements UseCase<CreateMediaDTO, Promise<Response>>
 
     const media: Media = mediaOrError.getValue();
 
+    let mediaId = "";
     try {
-      await this.mediaRepo.save(media);
+      mediaId = await this.mediaRepo.save(media);
     } catch (error: unknown) {
       //TODO: create a log for this
       return left(new GenericAppError.UnexpectedError(error)) as Response;
     }
 
-    return right(Result.ok<void>()) as Response;
+    return right(Result.ok<string>(mediaId)) as Response;
   }
 }

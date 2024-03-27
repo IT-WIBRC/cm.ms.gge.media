@@ -22,7 +22,7 @@ const fileUploadOptions = {
   abortOnLimit: true,
   responseOnLimit: `File too big (max size = ${MAX_FILE_NAME_SIZE ?? "1MB"})`,
   parseNested: true, // parse it to JSON
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
   limits: {
     fileSize: Number(MAX_FILE_SIZE) ?? 1048576,
     files: 1,

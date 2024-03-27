@@ -2,6 +2,7 @@ import { BaseController } from "../../../core/infra/BaseController";
 import { CreateMediaUseCase } from "./createMediaUseCase";
 import { CreateMediaErrors } from "./createMediaError";
 import { UploadedFile } from "express-fileupload";
+import { Result } from "../../../core/logic/Result";
 
 export class CreateMediaController extends BaseController {
   private useCase: CreateMediaUseCase;
@@ -18,11 +19,9 @@ export class CreateMediaController extends BaseController {
     if (!fileUploaded || Object.keys(fileUploaded).length === 0) {
       return this.clientError("No files were uploaded.");
     }
-
+  
     try {
       const result = await this.useCase.execute({
-        link: "",
-        type: fileUploaded?.mimetype?.split("/")[0]?.toUpperCase(),
         file: {
           ...fileUploaded,
         },
@@ -39,7 +38,7 @@ export class CreateMediaController extends BaseController {
             return this.fail(error.errorValue().message);
         }
       } else {
-        return this.ok(this.res);
+        return this.created(this.res, (result as Result<string>).getValue());
       }
     } catch (err) {
       return this.fail(err);

@@ -5,7 +5,7 @@ import { MediaRepo } from "../repos/mediaRepo";
 describe("MediaRepo", () => {
   const stubModels = {
     Media: {
-      save: jest.fn(),
+      save: jest.fn(() => ({ id: "6a133e20-277f-4f45-bfdf-957ba89f5838" })),
     },
   };
 

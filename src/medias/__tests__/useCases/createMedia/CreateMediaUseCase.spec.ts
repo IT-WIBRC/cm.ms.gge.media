@@ -15,7 +15,6 @@ describe("CreateMediaUseCase", () => {
     cloudinaryServiceStub,
   );
   const baseRequest = {
-    type: "IMAGE",
     description: "Here is the image",
     file: {
       name: "test image",
@@ -37,7 +36,13 @@ describe("CreateMediaUseCase", () => {
   it("should return an error message when the file type is not supported", async () => {
     const request = {
       ...baseRequest,
-      type: "AUDIO",
+      file: {
+        name: "test image",
+        data: Buffer.from(""),
+        mimetype: "audio/mpeg",
+        size: 189098,
+        encoding: "utf-8",
+      },
     };
 
     const unsupportedFileType = await createMediaUseCase.execute(

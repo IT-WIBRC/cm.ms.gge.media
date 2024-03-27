@@ -1,10 +1,11 @@
+import "reflect-metadata";
 import fs from "fs";
 import path from "path";
 import { databaseCredential } from "../config/config";
 import { DataSource, Repository } from "typeorm";
 import { isProduction } from "../../../config";
 
-const { username, password, database, host, dialect, port } =
+const { username, database, dialect, port } =
   databaseCredential;
 
 const models = fs
@@ -18,16 +19,20 @@ const modelNames = models.map((model) => Object.keys(model)[0]);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const modelClass = models.map((model) => Object.values<any>(model)[0]);
 
+console.log(modelClass);
+
 const connection = new DataSource({
   type: dialect,
   port,
   username,
-  password,
+  password: `${process.env.DB_PASS}`,
   database,
-  host,
   synchronize: !!isProduction,
   logging: !isProduction,
-  entities: modelClass,
+  entities: [`${__dirname}/**/typeorm/models/*.{ts}`],
+  logger: "advanced-console",
+  uuidExtension: "uuid-ossp",
+  migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
 });
 
 type TypeOrmModelRepository = {
