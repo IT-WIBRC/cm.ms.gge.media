@@ -19,6 +19,8 @@ const modelNames = models.map((model) => Object.keys(model)[0]);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const modelClass = models.map((model) => Object.values<any>(model)[0]);
 
+console.log(modelClass);
+
 const connection = new DataSource({
   type: dialect,
   port,
