@@ -41,7 +41,7 @@ jobs:
       - name: Dependencies vulnerabilities
         run: npm audit
 
-      - name: Initialization
+      - name: Dependencies installation
         run: npm ci
 
       - name: Linter
