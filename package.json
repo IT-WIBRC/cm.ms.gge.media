@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && tsc",
 
     "migration:generate": "rimraf ./src/migrations && cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:generate ./src/migrations/media -t Date.now",
-    "migration:create": "rimraf ./src/migrations && cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:create ./src/migrations/media -t Date.now",
+    "migration:create": "rimraf ./src/migrations && cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/migrations/media -t Date.now",
     "migration:revert": "cross-env NODE_ENV=test typeorm -- -d ./src/infra/typeorm/models/index.ts migration:revert",
     "migration:run": "cross-env NODE_ENV=test typeorm-ts-node-commonjs -d ./src/infra/typeorm/models/index.ts migration:run",
     
