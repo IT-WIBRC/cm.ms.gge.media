@@ -58,4 +58,6 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PORT: ${{ secrets.DB_TEST_DB_PORT }}
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
         run: npm run migration:generate && npm run migration:run && npm run test:unit

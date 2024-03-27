@@ -29,6 +29,8 @@ const connection = new DataSource({
   synchronize: !!isProduction,
   logging: !isProduction,
   entities: modelClass,
+  logger: "advanced-console",
+  migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
 });
 
 type TypeOrmModelRepository = {
